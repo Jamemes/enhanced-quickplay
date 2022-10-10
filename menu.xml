@@ -1,0 +1,119 @@
+<table>
+    <menu search="menu;id='start_menu'">
+        <node search="node;name='main'">
+			<item index="before:item;name='crimenet'" next_node="quickplay_settings" font="fonts/font_large_mf" font_size="35" help_id="menu_cn_quickplay_desc" name="quick_game" sign_in="true" text_id="menu_cn_quickplay"/>
+		</node>
+		<node gui_class="MenuNodeCrimenetGui" menu_components="crimenet_contract" modifier="MenuCrimeNetContractInitiator" name="quickplay_contract_join" scene_state="lobby" topic_id="menu_crimenet">
+			<default_item name="accept_contract"/>
+			<item align="right" callback="accept_quickplay_contract" name="accept_contract" text_id="cn_menu_accept_contract"/>
+			<item align="right" name="decline_contract" previous_node="true" text_id="cn_menu_decline_contract"/>
+		</node>
+		<node search="node;name='quickplay_settings'" menu_components="" scene_state="blackmarket">
+		
+			<item search="item;callback='quickplay_loud_toggle'" visible_callback="hidden"/>
+			<item search="item;callback='quickplay_stealth_toggle'" visible_callback="hidden"/>
+			<item search="item;callback='quickplay_mutators_toggle'" visible_callback="hidden"/>
+			<item search="item;name='quickplay_settings_level_max'" visible_callback="hidden"/>
+			<item search="item;name='quickplay_settings_level_min'" text_id="menu_quickplay_host_level" help_id=""/>
+			<item search="item;name='quickplay'" font="fonts/font_large_mf" font_size="35" text_id="menu_smm_search_job"/>
+			
+			<item index="before:item;name='quickplay_settings_level_min'" color="Color.white" name="divider_lobby_filters" no_text="false" size="8" text_id="menu_lobby_filters" type="MenuItemDivider" visible_callback="is_win32"/>
+
+			<item index="before:item;name='quickplay_settings_level_min'" name="divider_server" no_text="true" size="16" type="MenuItemDivider"/>
+			
+			<item index="before:item;name='quickplay_settings_level_min'" callback="quickplay_toggle_gamemode" name="quickplay_gamemode" text_id="" font="fonts/font_large_mf" font_size="23" type="MenuItemMultiChoice">
+				<option text_id="menu_gamemode_heist" value="standard"/>
+				<option text_id="menu_gamemode_spree" value="crime_spree"/>
+				<option text_id="menu_random_skirmish" value="skirmish"/>
+			</item>
+			
+			<item index="before:item;name='quickplay_settings_level_min'" name="divider_server" no_text="true" size="8" type="MenuItemDivider"/>
+
+			<item index="before:item;name='quickplay_settings_level_min'" callback="quickplay_toggle_servers" name="quickplay_servers" text_id="menu_quickplay_search_type" type="MenuItemMultiChoice">
+				<option text_id="menu_mutator_cloaker_effect_random" value="random"/>
+				<option text_id="menu_players_list" value="players_list"/>
+			</item>
+			
+			<item index="before:item;name='quickplay_settings_level_min'" callback="quickplay_toggle_distance" filter="true" name="quickplay_distance" text_id="menu_dist_filter" type="MenuItemMultiChoice">
+				<option text_id="menu_dist_filter_close" value="1"/>
+				<option text_id="menu_dist_filter_far" value="2"/>
+				<option text_id="menu_dist_filter_worldwide" value="3"/>
+			</item>
+			
+			<item index="before:item;name='quickplay_settings_level_min'" callback="quickplay_toggle_state" name="quickplay_state" text_id="menu_quickplay_server_state" type="MenuItemMultiChoice">
+				<option text_id="menu_any" value="any"/>
+				<option text_id="menu_lobby_server_state_in_lobby" value="in_lobby"/>
+				<option text_id="menu_lobby_server_state_in_game" value="in_game"/>
+			</item>
+			
+			<item index="before:item;name='quickplay_settings_level_min'" callback="quickplay_toggle_hide_banned" name="quickplay_hide_banned" text_id="menu_quickplay_hide_banned" type="CoreMenuItemToggle.ItemToggle">
+				<option h="24" icon="guis/textures/menu_tickbox" s_h="24" s_icon="guis/textures/menu_tickbox" s_w="24" s_x="24" s_y="24" value="on" w="24" x="24" y="0"/>
+				<option h="24" icon="guis/textures/menu_tickbox" s_h="24" s_icon="guis/textures/menu_tickbox" s_w="24" s_x="0" s_y="24" value="off" w="24" x="0" y="0"/>
+			</item>
+			
+			<item index="before:item;name='quickplay_settings_level_min'" callback="quickplay_toggle_instant_join" name="quickplay_instant_join" text_id="menu_quickplay_instant" type="CoreMenuItemToggle.ItemToggle">
+				<option h="24" icon="guis/textures/menu_tickbox" s_h="24" s_icon="guis/textures/menu_tickbox" s_w="24" s_x="24" s_y="24" value="on" w="24" x="24" y="0"/>
+				<option h="24" icon="guis/textures/menu_tickbox" s_h="24" s_icon="guis/textures/menu_tickbox" s_w="24" s_x="0" s_y="24" value="off" w="24" x="0" y="0"/>
+			</item>
+			
+			<item index="before:item;name='quickplay_settings_level_min'" name="divider_server" no_text="true" size="16" type="MenuItemDivider"/>
+			
+			<item index="before:item;name='quickplay_settings_level_min'" callback="quickplay_toggle_job_plan" help_id="menu_preferred_plan_help" name="quickplay_job_plan" text_id="menu_preferred_plan" type="MenuItemMultiChoice">
+				<option text_id="menu_any" value="any"/>
+				<option text_id="menu_plan_loud" value="loud"/>
+				<option text_id="menu_plan_stealth" value="stealth"/>
+			</item>
+			
+			<item index="before:item;name='quickplay_settings_level_min'" callback="quickplay_toggle_mods" name="quickplay_mods" text_id="menu_mods" type="MenuItemMultiChoice">
+				<option text_id="menu_any" value="any"/>
+				<option text_id="menu_on" value="on"/>
+				<option text_id="menu_off" value="off"/>
+			</item>
+		
+			<item index="before:item;name='quickplay_settings_level_min'" callback="quickplay_toggle_one_down" name="quickplay_one_down" text_id="menu_toggle_one_down" type="MenuItemMultiChoice">
+				<option text_id="menu_off" value="off"/>
+				<option text_id="menu_on" value="on"/>
+				<option text_id="menu_any" value="any"/>
+			</item>
+			
+			<item index="before:item;name='quickplay_settings_level_min'" callback="quickplay_toggle_mutators" name="quickplay_mutators" help_id="menu_quickplay_settings_mutators_help" text_id="menu_quickplay_settings_mutators" type="MenuItemMultiChoice">
+				<option text_id="menu_off" value="off"/>
+				<option text_id="menu_on" value="on"/>
+				<option text_id="menu_any" value="any"/>
+			</item>
+	
+			<item index="before:item;name='quickplay_option_default'" name="divider" no_text="true" size="8" type="MenuItemDivider"/>
+			
+			<item index="before:item;name='quickplay_option_default'" callback="quickplay_toggle_difficulty" name="quickplay_difficulty" text_id="menu_difficulty" type="MenuItemMultiChoice">
+				<option text_id="menu_any" value="1"/>
+				<option text_id="menu_difficulty_normal" value="2"/>
+				<option text_id="menu_difficulty_hard" value="3"/>
+				<option text_id="menu_difficulty_very_hard" value="4"/>
+				<option text_id="menu_difficulty_overkill" value="5"/>
+				<option text_id="menu_difficulty_easy_wish" value="6"/>
+				<option text_id="menu_difficulty_apocalypse" value="7"/>
+				<option text_id="menu_difficulty_sm_wish" value="8"/>
+			</item>
+			
+			<item index="before:item;name='quickplay_option_default'" callback="quickplay_toggle_difficulty_range" name="quickplay_difficulty_range" text_id="menu_diff_filter" type="MenuItemMultiChoice">
+				<option text_id="menu_equal" value="equal"/>
+				<option text_id="menu_equalto_or_greater_than" value="equalto_or_greater_than"/>
+				<option text_id="menu_equalto_less_than" value="equalto_less_than"/>
+			</item>
+
+			<item index="before:item;name='quickplay_option_default'" name="divider" no_text="true" size="15" type="MenuItemDivider"/>
+			
+			<item index="before:item;name='quickplay_option_default'" align="right" callback="check_blacklisted_mods" font="fonts/font_medium_mf" font_size="24" name="check_blacklisted_mods" text_id="menu_blacklisted_mods"/>
+			
+			<item index="before:item;name='quickplay_option_default'" name="divider" no_text="true" size="5" type="MenuItemDivider"/>
+			
+			<item index="before:item;name='quickplay_option_default'" callback="quickplay_toggle_blacklisted_mods" name="quickplay_blacklisted_mods" text_id="menu_hide_blacklisted" type="CoreMenuItemToggle.ItemToggle">
+				<option h="24" icon="guis/textures/menu_tickbox" s_h="24" s_icon="guis/textures/menu_tickbox" s_w="24" s_x="24" s_y="24" value="on" w="24" x="24" y="0"/>
+				<option h="24" icon="guis/textures/menu_tickbox" s_h="24" s_icon="guis/textures/menu_tickbox" s_w="24" s_x="0" s_y="24" value="off" w="24" x="0" y="0"/>
+			</item>
+			
+			<item index="before:item;name='quickplay_option_default'" name="divider" no_text="true" size="25" type="MenuItemDivider"/>
+        </node>
+   </menu>
+</table>
+	
