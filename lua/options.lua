@@ -12,7 +12,7 @@ function MenuQuickplaySettingsInitiator:modify_node(node)
 	add_call("servers", "random")
 	add_call("distance", 3)
 	add_call("state")
-	add_call("hide_banned", "on")
+	add_call("hide_banned", "off")
 	add_call("instant_join", "off")
 	
 	add_call("job_plan")

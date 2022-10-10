@@ -1,15 +1,16 @@
 <table>
     <menu search="menu;id='start_menu'">
         <node search="node;name='main'">
-			<item index="before:item;name='crimenet'" next_node="quickplay_settings" font="fonts/font_large_mf" font_size="35" help_id="menu_cn_quickplay_desc" name="quick_game" sign_in="true" text_id="menu_cn_quickplay"/>
+			<item index="before:item;name='crimenet'" next_node="quickplay_settings" font="fonts/font_large_mf" font_size="35" name="quick_game" sign_in="true" text_id="menu_cn_quickplay"/>
 		</node>
+		
 		<node gui_class="MenuNodeCrimenetGui" menu_components="crimenet_contract" modifier="MenuCrimeNetContractInitiator" name="quickplay_contract_join" scene_state="lobby" topic_id="menu_crimenet">
 			<default_item name="accept_contract"/>
 			<item align="right" callback="accept_quickplay_contract" name="accept_contract" text_id="cn_menu_accept_contract"/>
 			<item align="right" name="decline_contract" previous_node="true" text_id="cn_menu_decline_contract"/>
 		</node>
-		<node search="node;name='quickplay_settings'" menu_components="" scene_state="blackmarket">
 		
+		<node search="node;name='quickplay_settings'" align_line_proportions="0.55" menu_components="" scene_state="blackmarket">
 			<item search="item;callback='quickplay_loud_toggle'" visible_callback="hidden"/>
 			<item search="item;callback='quickplay_stealth_toggle'" visible_callback="hidden"/>
 			<item search="item;callback='quickplay_mutators_toggle'" visible_callback="hidden"/>
@@ -58,27 +59,21 @@
 			
 			<item index="before:item;name='quickplay_settings_level_min'" name="divider_server" no_text="true" size="16" type="MenuItemDivider"/>
 			
-			<item index="before:item;name='quickplay_settings_level_min'" callback="quickplay_toggle_job_plan" help_id="menu_preferred_plan_help" name="quickplay_job_plan" text_id="menu_preferred_plan" type="MenuItemMultiChoice">
+			<item index="before:item;name='quickplay_settings_level_min'" callback="quickplay_toggle_job_plan" name="quickplay_job_plan" text_id="menu_preferred_plan_help" type="MenuItemMultiChoice">
 				<option text_id="menu_any" value="any"/>
 				<option text_id="menu_plan_loud" value="loud"/>
 				<option text_id="menu_plan_stealth" value="stealth"/>
 			</item>
 			
-			<item index="before:item;name='quickplay_settings_level_min'" callback="quickplay_toggle_mods" name="quickplay_mods" text_id="menu_mods" type="MenuItemMultiChoice">
+			<item index="before:item;name='quickplay_settings_level_min'" callback="quickplay_toggle_mods" name="quickplay_mods" text_id="menu_toggle_modded_lobbies" type="MenuItemMultiChoice">
 				<option text_id="menu_any" value="any"/>
-				<option text_id="menu_on" value="on"/>
-				<option text_id="menu_off" value="off"/>
-			</item>
-		
-			<item index="before:item;name='quickplay_settings_level_min'" callback="quickplay_toggle_one_down" name="quickplay_one_down" text_id="menu_toggle_one_down" type="MenuItemMultiChoice">
-				<option text_id="menu_off" value="off"/>
-				<option text_id="menu_on" value="on"/>
-				<option text_id="menu_any" value="any"/>
+				<option text_id="dialog_yes" value="on"/>
+				<option text_id="dialog_no" value="off"/>
 			</item>
 			
-			<item index="before:item;name='quickplay_settings_level_min'" callback="quickplay_toggle_mutators" name="quickplay_mutators" help_id="menu_quickplay_settings_mutators_help" text_id="menu_quickplay_settings_mutators" type="MenuItemMultiChoice">
-				<option text_id="menu_off" value="off"/>
-				<option text_id="menu_on" value="on"/>
+			<item index="before:item;name='quickplay_settings_level_min'" callback="quickplay_toggle_mutators" name="quickplay_mutators" text_id="menu_toggle_mutated_lobby" type="MenuItemMultiChoice">
+				<option text_id="dialog_no" value="off"/>
+				<option text_id="dialog_yes" value="on"/>
 				<option text_id="menu_any" value="any"/>
 			</item>
 	
@@ -99,6 +94,12 @@
 				<option text_id="menu_equal" value="equal"/>
 				<option text_id="menu_equalto_or_greater_than" value="equalto_or_greater_than"/>
 				<option text_id="menu_equalto_less_than" value="equalto_less_than"/>
+			</item>
+	
+			<item index="before:item;name='quickplay_option_default'" callback="quickplay_toggle_one_down" name="quickplay_one_down" text_id="menu_toggle_one_down_lobbies" type="MenuItemMultiChoice">
+				<option text_id="dialog_no" value="off"/>
+				<option text_id="dialog_yes" value="on"/>
+				<option text_id="menu_any" value="any"/>
 			</item>
 
 			<item index="before:item;name='quickplay_option_default'" name="divider" no_text="true" size="15" type="MenuItemDivider"/>

@@ -11,7 +11,7 @@ Hooks:Add("LocalizationManagerPostInit", "Quickplay_Enhanced_loc", function(...)
 		menu_quickplay_mouse_right = "Ban player",
 		menu_quickplay_server_state = "Server State",
 		menu_quickplay_hide_banned = "Hide banned players",
-		menu_quickplay_host_level = "Host level",
+		menu_quickplay_host_level = "Host level (Greater or Equal)",
 		menu_cs_rank = "Rank: ",
 		menu_equal = "Equal",
 		menu_equalto_or_greater_than = "Greater or Equal",
@@ -32,7 +32,7 @@ Hooks:Add("LocalizationManagerPostInit", "Quickplay_Enhanced_loc", function(...)
 			menu_quickplay_mouse_right = "Забанить игрока",
 			menu_quickplay_server_state = "Статус сервера",
 			menu_quickplay_hide_banned = "Скрыть забаненых игроков",
-			menu_quickplay_host_level = "Уровень лидера лобби",
+			menu_quickplay_host_level = "Уровень лидера лобби (Больше или равно)",
 			menu_cs_rank = "Ранг: ",
 			menu_equal = "Равно",
 			menu_equalto_or_greater_than = "Больше или равно",
@@ -54,7 +54,7 @@ Hooks:Add("LocalizationManagerPostInit", "Quickplay_Enhanced_loc", function(...)
 			menu_quickplay_mouse_right = "封禁玩家",
 			menu_quickplay_server_state = "服务器状态",
 			menu_quickplay_hide_banned = "隐藏被拉入黑名单的玩家",
-			menu_quickplay_host_level = "主机等级",
+			menu_quickplay_host_level = "主机等级 (不小于)",
 			menu_cs_rank = "等级： ",
 			menu_equal = "等于",
 			menu_equalto_or_greater_than = "不小于",
@@ -132,7 +132,7 @@ local function search_quick_lobbies()
 				end
 			
 				local blacklisted_mods = quick.blacklisted_mods or "on"
-				local hide_banned = quick.hide_banned or "on"
+				local hide_banned = quick.hide_banned or "off"
 				skip_lobby(blacklisted_mods == "on" and unacceptable_mods_found(validated_value(lobby, "mods")))
 				skip_lobby(blacklisted_mods == "on" and managers.ban_list:banned(lobby:key_value("owner_id")))
 				skip_lobby(string.find(tostring(lobby:key_value("owner_name")), "P3DHack"))
