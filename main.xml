@@ -1,5 +1,5 @@
 <table>
-	<AssetUpdates id="Jamemes/enhanced-quickplay" provider="github" branch="main" folder_name="Enhanced Quickplay"/>
+	<AssetUpdates id="Jamemes/enhanced-quickplay" provider="github" branch="main"/>
 
 	<Hooks directory="lua">
 		<hook source_file="lib/managers/menumanager" file="quickplay.lua"/>
