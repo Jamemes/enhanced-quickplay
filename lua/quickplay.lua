@@ -562,9 +562,7 @@ MenuCallbackHandler.check_blacklisted_mods = function(self)
 					local yes = {
 						text = managers.localization:text("dialog_yes"),
 						callback_func = function()
-							for i = 1, #mods_blacklist do 
-								mods_blacklist[i] = nil 
-							end
+							Global.crimenet.mods_blacklist = {}
 						end
 					}
 					local no = {
@@ -594,9 +592,6 @@ end
 local function add_call(option)
 	MenuCallbackHandler["quickplay_toggle_"..option] = function(self, item)
 		local quick = Global.crimenet and Global.crimenet.quickplay
-		if not quick then
-			quick = {}
-		end
 		quick[option] = item:value()
 	end
 end

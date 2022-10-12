@@ -133,9 +133,12 @@ function CrimeNetContractGui:mouse_pressed(o, button, x, y)
 			end
 		end
 		
-		local mods_blacklist = Global.crimenet.mods_blacklist or {}
+		local mods_blacklist = Global.crimenet.mods_blacklist
 		if self._mod_items and self._mods_tab and self._mods_tab:is_active() then
 			if button == Idstring("0") then
+				if not mods_blacklist then
+					Global.crimenet.mods_blacklist = {}
+				end
 				for _, item in ipairs(self._mod_items) do
 					if item[1]:inside(x, y) then
 						local mod_name = item[1]:text()

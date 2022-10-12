@@ -1,5 +1,5 @@
 <table>
-	<AssetUpdates id="39853" provider="modworkshop" version="1"/>
+	<AssetUpdates id="39853" provider="modworkshop" version="2"/>
 
 	<Hooks directory="lua">
 		<hook source_file="lib/managers/menumanager" file="quickplay.lua"/>
