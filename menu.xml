@@ -1,7 +1,7 @@
 <table>
     <menu search="menu;id='start_menu'">
         <node search="node;name='main'">
-			<item index="before:item;name='crimenet'" next_node="quickplay_settings" font="fonts/font_large_mf" font_size="35" name="quick_game" sign_in="true" text_id="menu_cn_quickplay"/>
+			<item index="before:item;name='crimenet'" callback="play_online_game chk_dlc_content_updated chk_dlc_content_updated_xb1 on_press_tracking" next_node="quickplay_settings" font="fonts/font_large_mf" font_size="35" name="quick_game" sign_in="true" text_id="menu_cn_quickplay"/>
 		</node>
 		
 		<node gui_class="MenuNodeCrimenetGui" menu_components="crimenet_contract" modifier="MenuCrimeNetContractInitiator" name="quickplay_contract_join" scene_state="lobby" topic_id="menu_crimenet">
