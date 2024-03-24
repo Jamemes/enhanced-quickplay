@@ -4,7 +4,7 @@ function MenuQuickplaySettingsInitiator:modify_node(node)
 		local default = value or "any"
 		node:item("quickplay_"..option):set_value(quick and quick[option] or default)
 	end
-	
+
 	node:item("quickplay_settings_level_min"):set_max(100)
 	node:item("quickplay_settings_level_min"):set_value(quick and quick.level_diff_min or 0)
 	
@@ -22,6 +22,12 @@ function MenuQuickplaySettingsInitiator:modify_node(node)
 	add_call("difficulty", 1)
 	add_call("difficulty_range", "equal")
 	add_call("blacklisted_mods")
+	add_call("main_menu_visible", "off")
 
 	return node
+end
+
+function MenuCallbackHandler:quickplay_main_menu_visible()
+	local quick = Global.crimenet and Global.crimenet.quickplay
+	return quick.main_menu_visible == nil or quick.main_menu_visible ~= "on"
 end

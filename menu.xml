@@ -1,7 +1,7 @@
 <table>
     <menu search="menu;id='start_menu'">
         <node search="node;name='main'">
-			<item index="before:item;name='crimenet'" callback="play_online_game chk_dlc_content_updated chk_dlc_content_updated_xb1 on_press_tracking" next_node="quickplay_settings" font="fonts/font_large_mf" font_size="35" name="quick_game" sign_in="true" text_id="menu_cn_quickplay"/>
+			<item index="before:item;name='crimenet'" callback="play_online_game chk_dlc_content_updated chk_dlc_content_updated_xb1 on_press_tracking" next_node="quickplay_settings" font="fonts/font_large_mf" font_size="35" name="quick_game" text_id="menu_cn_quickplay" visible_callback="quickplay_main_menu_visible"/>
 		</node>
 		
 		<node gui_class="MenuNodeCrimenetGui" menu_components="crimenet_contract" modifier="MenuCrimeNetContractInitiator" name="quickplay_contract_join" scene_state="lobby" topic_id="menu_crimenet">
@@ -113,6 +113,10 @@
 				<option h="24" icon="guis/textures/menu_tickbox" s_h="24" s_icon="guis/textures/menu_tickbox" s_w="24" s_x="0" s_y="24" value="off" w="24" x="0" y="0"/>
 			</item>
 			
+			<item index="before:item;name='quickplay_option_default'" callback="quickplay_toggle_main_menu_visible" name="quickplay_main_menu_visible" text_id="menu_quickplay_main_menu_visible" type="CoreMenuItemToggle.ItemToggle">
+				<option h="24" icon="guis/textures/menu_tickbox" s_h="24" s_icon="guis/textures/menu_tickbox" s_w="24" s_x="24" s_y="24" value="on" w="24" x="24" y="0"/>
+				<option h="24" icon="guis/textures/menu_tickbox" s_h="24" s_icon="guis/textures/menu_tickbox" s_w="24" s_x="0" s_y="24" value="off" w="24" x="0" y="0"/>
+			</item>
 			<item index="before:item;name='quickplay_option_default'" name="divider" no_text="true" size="25" type="MenuItemDivider"/>
         </node>
    </menu>

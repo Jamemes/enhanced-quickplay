@@ -17,6 +17,7 @@ Hooks:Add("LocalizationManagerPostInit", "Quickplay_Enhanced_loc", function(...)
 		menu_equalto_or_greater_than = "Greater or Equal",
 		menu_equalto_less_than = "Less or Equal",
 		menu_quickplay_search_type = "Search Type",
+		menu_quickplay_main_menu_visible = "Hide Quickplay button in main menu (restart needed)",
 	})
 
 	if Idstring("russian"):key() == SystemInfo:language():key() then
@@ -38,6 +39,7 @@ Hooks:Add("LocalizationManagerPostInit", "Quickplay_Enhanced_loc", function(...)
 			menu_equalto_or_greater_than = "Больше или равно",
 			menu_equalto_less_than = "Меньше или равно",
 			menu_quickplay_search_type = "Тип поиска",
+			menu_quickplay_main_menu_visible = "Скрыть кнопку Быстрой игры в меню (необходим перезапуск игры)",
 		})
 	end
 
@@ -110,11 +112,11 @@ local function search_quick_lobbies()
 	end
 
 	local function refresh_lobby()
-		if not self.browser then
+		if not LobbyBrowser then
 			return
 		end
 
-		local lobbies = self.browser:lobbies()
+		local lobbies = LobbyBrowser:lobbies()
 		local info = {
 			room_list = {},
 			attribute_list = {}
@@ -165,9 +167,7 @@ local function search_quick_lobbies()
 		self:_call_callback("search_quick_lobbies", info)
 	end
 
-	self.browser = LobbyBrowser(refresh_lobby, function ()
-	end)
-
+	LobbyBrowser:set_callbacks(refresh_lobby)
 	local interest_keys = {
 		"owner_id",
 		"owner_name",
@@ -189,47 +189,47 @@ local function search_quick_lobbies()
 		table.insert(interest_keys, self._BUILD_SEARCH_INTEREST_KEY)
 	end
 	
-	self.browser:set_interest_keys(interest_keys)
-	self.browser:set_lobby_filter(self._BUILD_SEARCH_INTEREST_KEY, "true", "equal")
-	self.browser:set_max_lobby_return_count(50)
-	self.browser:set_distance_filter(quick.distance or 3)
+	LobbyBrowser:set_interest_keys(interest_keys)
+	LobbyBrowser:set_lobby_filter(self._BUILD_SEARCH_INTEREST_KEY, "true", "equal")
+	LobbyBrowser:set_max_lobby_return_count(50)
+	LobbyBrowser:set_distance_filter(quick.distance or 3)
 	
 	local gamemode = quick.gamemode or "standard"
 	if gamemode == "crime_spree" then
-		self.browser:set_lobby_filter("crime_spree", 1, "equalto_or_greater_than")
+		LobbyBrowser:set_lobby_filter("crime_spree", 1, "equalto_or_greater_than")
 	elseif gamemode == "skirmish" then
-		self.browser:set_lobby_filter("skirmish", 1, "equalto_or_greater_than")
+		LobbyBrowser:set_lobby_filter("skirmish", 1, "equalto_or_greater_than")
 	else
-		self.browser:set_lobby_filter("crime_spree", -1, "equalto_less_than")
-		self.browser:set_lobby_filter("skirmish", 0, "equalto_less_than")
+		LobbyBrowser:set_lobby_filter("crime_spree", -1, "equalto_less_than")
+		LobbyBrowser:set_lobby_filter("skirmish", 0, "equalto_less_than")
 		
 		local job_plan = quick.job_plan or "any"
-		self.browser:set_lobby_filter("job_plan", job_plan == "stealth" and 2 or job_plan == "loud" and 1 or -1, job_plan == "any" and "equalto_or_greater_than" or "equal")
+		LobbyBrowser:set_lobby_filter("job_plan", job_plan == "stealth" and 2 or job_plan == "loud" and 1 or -1, job_plan == "any" and "equalto_or_greater_than" or "equal")
 		
 		local one_down = quick.one_down or "off"
-		self.browser:set_lobby_filter("one_down", 0, one_down == "off" and "equal" or one_down == "on" and "greater_than" or "equalto_or_greater_than")
+		LobbyBrowser:set_lobby_filter("one_down", 0, one_down == "off" and "equal" or one_down == "on" and "greater_than" or "equalto_or_greater_than")
 
 		local mutators = quick.mutators or "off"
-		self.browser:set_lobby_filter("mutators", 0, mutators == "off" and "equal" or mutators == "on" and "greater_than" or "equalto_or_greater_than")
+		LobbyBrowser:set_lobby_filter("mutators", 0, mutators == "off" and "equal" or mutators == "on" and "greater_than" or "equalto_or_greater_than")
 
 		local difficulty = quick.difficulty or 1
 		local difficulty_range = quick.difficulty_range or "equal"
-		self.browser:set_lobby_filter("difficulty", difficulty, difficulty == 1 and "equalto_or_greater_than" or difficulty_range)
+		LobbyBrowser:set_lobby_filter("difficulty", difficulty, difficulty == 1 and "equalto_or_greater_than" or difficulty_range)
 	end
 
 	local state = quick.state or "any"
-	self.browser:set_lobby_filter("state", 1, state == "in_lobby" and "equal" or state == "in_game" and "greater_than" or "equalto_or_greater_than")
+	LobbyBrowser:set_lobby_filter("state", 1, state == "in_lobby" and "equal" or state == "in_game" and "greater_than" or "equalto_or_greater_than")
 	
 	local mods = quick.mods or "any"
-	self.browser:set_lobby_filter("mods", "1", mods == "off" and "equal" or mods == "on" and "greater_than" or "equalto_or_greater_than")
+	LobbyBrowser:set_lobby_filter("mods", "1", mods == "off" and "equal" or mods == "on" and "greater_than" or "equalto_or_greater_than")
 	
 	local level_diff_min = quick.level_diff_min or 0
-	self.browser:set_lobby_filter("owner_level", level_diff_min, "equalto_or_greater_than")
+	LobbyBrowser:set_lobby_filter("owner_level", level_diff_min, "equalto_or_greater_than")
 	
 	if Global.game_settings.playing_lan then
-		self.browser:refresh_lan()
+		LobbyBrowser:refresh_lan()
 	else
-		self.browser:refresh()
+		LobbyBrowser:refresh()
 	end
 end
 
@@ -609,3 +609,4 @@ add_call("mutators")
 add_call("difficulty")
 add_call("difficulty_range")
 add_call("blacklisted_mods")
+add_call("main_menu_visible")

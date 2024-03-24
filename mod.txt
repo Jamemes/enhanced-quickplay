@@ -1,0 +1,14 @@
+{
+	"name": "Enhanced Quickplay",
+	"description": "",
+	"author": "James",
+	"version": "4",
+	"updates" : [
+		{
+			"identifier" : "enhanced_quickplay",
+			"host": {
+				"meta": "https://raw.githubusercontent.com/Jamemes/enhanced-quickplay/meta/meta.json"
+			}
+		}
+	]
+}

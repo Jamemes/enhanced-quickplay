@@ -1,6 +1,4 @@
 <table>
-	<AssetUpdates id="39853" provider="modworkshop" version="3"/>
-
 	<Hooks directory="lua">
 		<hook source_file="lib/managers/menumanager" file="quickplay.lua"/>
 		<hook source_file="lib/managers/menumanagerpd2" file="options.lua"/>
